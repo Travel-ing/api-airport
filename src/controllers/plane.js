@@ -18,7 +18,8 @@ async function getPlaneById(id) {
 
 async function updatePlane(id, body) {
   try {
-    return await PlaneModel.findByIdAndUpdate(id, body)
+    await PlaneModel.findByIdAndUpdate(id, body);
+    return getPlaneById(id)
   } catch (error) {
     throw new Error(error);
   }

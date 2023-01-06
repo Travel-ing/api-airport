@@ -1,12 +1,17 @@
 const mongoose = require("mongoose");
-const { PlaneSchema } = require("plane");
 const { Schema } = mongoose;
 
 const FlySchema = new Schema({
-  plane: PlaneSchema,
-  place: Number,
-  start: AirportFly,
-  finish: AirportFly,
+  plane: { type: Schema.Types.ObjectId, ref: "plane", required: true },
+  passenger: Number,
+  start: {
+    airport: { type: Schema.Types.ObjectId, ref: "airport", required: true },
+    date: Date,
+  },
+  finish: {
+    airport: { type: Schema.Types.ObjectId, ref: "airport", required: true },
+    date: Date,
+  },
 });
 
 const FlyModel = mongoose.model("fly", FlySchema);

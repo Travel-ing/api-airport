@@ -6,7 +6,7 @@ mongoose
   .connect(mongoDB, { useNewUrlParser: true })
   .then(() => console.log("Connect to MongoDB"))
   .catch((err) => {
-    console.log("Error to connect MongoDB");
+    console.log("Error to connect MongoDB: " + err);
   });
 
 const db = mongoose.connection;

@@ -1,34 +1,53 @@
 var express = require("express");
 var router = express.Router();
+const controller = require("../controllers/fly");
 
-router.get("/:id", function (req, res, next) {
-  console.log("Get Fly by id");
-  res.end()
+router.get("/:id", async function (req, res) {
+  try {
+    res.status(200).json(await controller.getFlyById(req.params.id));
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
 });
 
-router.post("/", function (req, res, next) {
-  console.log("Create Fly");
-  res.end();
+router.post("/", async function (req, res, next) {
+  try {
+    res.status(200).json(await controller.createFly(req.body));
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
 });
 
-router.put("/:id", function (req, res, next) {
-  console.log("Update Fly");
-  res.end();
+router.put("/:id", async function (req, res) {
+  try {
+    res.status(200).json(await controller.updateFly(req.params.id, req.body));
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
 });
 
-router.delete("/:id", function (req, res, next) {
-  console.log("Delete Fly");
-  res.end();
+router.delete("/:id", async function (req, res) {
+  try {
+    res.status(200).json(await controller.deleteFly(req.params.id));
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
 });
 
-router.get("/current", function (req, res, next) {
-  console.log("Get Current fly");
-  res.end();
+router.get("/current/fly", async function (req, res) {
+  try {
+    res.status(200).json(await controller.currentFly());
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
 });
 
-router.get("/coming", function (req, res, next) {
-  console.log("Get future Fly");
-  res.end();
+router.get("/coming/fly", async function (req, res) {
+  try {
+    res.status(200).json(await controller.comingFl());
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
 });
 
-module.exports = router
+module.exports = router;

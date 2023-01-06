@@ -7,15 +7,16 @@ const port = process.env.PORT || 3000;
 require("dotenv").config();
 mongoose.set("strictQuery", true);
 require("./services/mongoClient");
-const authorization = require("./middleware/authorization")
+const authorization = require("./middleware/authorization");
+const formatFly = require("./middleware/formatFly")
 
 const flyRouter = require("./routes/fly");
 const planeRouter = require("./routes/plane");
 const airportRouter = require("./routes/airport");
 
 app.use(cors(), bodyParser.json());
-app.use(authorization)
-app.use("/fly", flyRouter);
+app.use(authorization);
+app.use("/fly", formatFly, flyRouter);
 app.use("/plane", planeRouter);
 app.use("/airport", airportRouter);
 

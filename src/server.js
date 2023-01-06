@@ -8,6 +8,7 @@ require("dotenv").config();
 mongoose.set("strictQuery", true);
 require("./services/mongoClient");
 const authorization = require("./middleware/authorization");
+const logger = require("./middleware/logger");
 const formatFly = require("./middleware/formatFly")
 
 const flyRouter = require("./routes/fly");
@@ -16,6 +17,7 @@ const airportRouter = require("./routes/airport");
 
 app.use(cors(), bodyParser.json());
 app.use(authorization);
+app.use(logger);
 app.use("/fly", formatFly, flyRouter);
 app.use("/plane", planeRouter);
 app.use("/airport", airportRouter);

@@ -14,13 +14,16 @@ const formatFly = require("./middleware/formatFly")
 const flyRouter = require("./routes/fly");
 const planeRouter = require("./routes/plane");
 const airportRouter = require("./routes/airport");
+const dashboard = require("./routes/dashboard");
 
 app.use(cors(), bodyParser.json());
 app.use(authorization);
 app.use(logger);
+
 app.use("/fly", formatFly, flyRouter);
 app.use("/plane", planeRouter);
 app.use("/airport", airportRouter);
+app.use("/", dashboard);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);

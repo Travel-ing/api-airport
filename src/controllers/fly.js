@@ -1,4 +1,5 @@
 const { FlyModel } = require("../model/fly");
+const controllerWeather = require("./openWeather");
 
 async function getFlyById(id) {
   try {
@@ -31,13 +32,35 @@ async function deleteFly(id) {
   }
 }
 
+async function udpateDelay(id, delay) {
+  try {
+    await FlyModel.findByIdAndUpdate(id, { "finish.delay": delay });
+    return getFlyById(id);
+  } catch (error) {
+    throw new Error("Impossible de modifier le vol : " + id);
+  }
+}
+
 async function currentFly() {
   try {
-    return await FlyModel.find({
+    const flies = await FlyModel.find({
       "start.date": { $lte: new Date() },
       "finish.date": { $gte: new Date() },
+    }).populate("finish.airport", "coordinate");
+
+    flies.map(async (fly) => {
+      const weather = await controllerWeather.getWeatherByCoord(
+        fly.finish.airport.coordinate
+      );
+      const delay = await controllerWeather.setDelayFinish(weather);
+      if (delay > 0) {
+        udpateDelay(fly._id, delay);
+      }
     });
+
+    return flies;
   } catch (error) {
+    console.log(error);
     throw new Error("Impossible de récupérer les vols en cours");
   }
 }

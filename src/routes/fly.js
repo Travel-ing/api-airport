@@ -34,20 +34,4 @@ router.delete("/:id", async function (req, res) {
   }
 });
 
-router.get("/current/fly", async function (req, res) {
-  try {
-    res.status(200).json(await controller.currentFly());
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-});
-
-router.get("/coming/fly", async function (req, res) {
-  try {
-    res.status(200).json(await controller.comingFl());
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-});
-
 module.exports = router;

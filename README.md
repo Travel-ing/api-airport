@@ -2,6 +2,33 @@
 
 The REST API to the example app is described below.
 
+## Get flies
+
+### Request
+
+`GET /fly`
+
+### Response
+
+    [
+        {
+            "start": {
+                "delay": 0,
+                "airport": "639b2389461444b6c0c176cc",
+                "date": "2023-01-09T02:24:00.000Z"
+            },
+            "finish": {
+                "delay": 0,
+                "airport": "63b7f55b2879e9c072c9dcd1",
+                "date": "2023-01-10T22:24:00.000Z"
+            },
+            "_id": "63b7fbe009bd09d5e5d7b51b",
+            "plane": "639b21683067549beaf3b653",
+            "passenger": 221,
+            "__v": 0
+        }
+    ]
+
 ## Get fly by Id
 
 ### Request

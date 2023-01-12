@@ -9,6 +9,14 @@ async function getFlyById(id) {
   }
 }
 
+async function getFly() {
+  try {
+    return await FlyModel.find();
+  } catch (error) {
+    throw new Error("Impossible de récupérer la liste de vols");
+  }
+}
+
 async function createFly(body) {
   try {
     return await FlyModel.create(body);
@@ -105,5 +113,6 @@ module.exports = {
   updateFly,
   deleteFly,
   currentFly,
+  getFly,
   comingFly,
 };

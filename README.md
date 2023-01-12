@@ -134,7 +134,7 @@ With admin account
         "__v": 0
     }
 
-## Get plane
+## Get list of plane
 
 ### Request
 
@@ -155,7 +155,7 @@ With admin account
         }
     ]
 
-## Get list of plane
+## Get plane
 
 ### Request
 

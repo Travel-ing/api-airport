@@ -26,15 +26,24 @@ async function updateFly(id, body) {
 }
 async function deleteFly(id) {
   try {
-    return await FlyModel.findOneAndDelete(id);
+    return await FlyModel.findOneAndDelete({ _id: id });
   } catch (error) {
     throw new Error("Impossible de supprimer le vol : " + id);
   }
 }
 
-async function udpateDelay(id, delay) {
+async function udpateDelayFinish(id, delay) {
   try {
     await FlyModel.findByIdAndUpdate(id, { "finish.delay": delay });
+    return getFlyById(id);
+  } catch (error) {
+    throw new Error("Impossible de modifier le vol : " + id);
+  }
+}
+
+async function udpateDelayStart(id, delay) {
+  try {
+    await FlyModel.findByIdAndUpdate(id, { "start.delay": delay });
     return getFlyById(id);
   } catch (error) {
     throw new Error("Impossible de modifier le vol : " + id);
@@ -52,24 +61,35 @@ async function currentFly() {
       const weather = await controllerWeather.getWeatherByCoord(
         fly.finish.airport.coordinate
       );
-      const delay = await controllerWeather.setDelayFinish(weather);
+      const delay = await controllerWeather.setDelay(weather);
       if (delay > 0) {
-        udpateDelay(fly._id, delay);
+        udpateDelayFinish(fly._id, delay);
       }
     });
 
     return flies;
   } catch (error) {
-    console.log(error);
     throw new Error("Impossible de récupérer les vols en cours");
   }
 }
 
 async function comingFly() {
   try {
-    return await FlyModel.find({
+    const flies = await FlyModel.find({
       "start.date": { $gte: new Date() },
+    }).populate("start.airport", "coordinate");
+
+    flies.map(async (fly) => {
+      const weather = await controllerWeather.getWeatherByCoord(
+        fly.start.airport.coordinate
+      );
+      const delay = await controllerWeather.setDelay(weather);
+      if (delay > 0) {
+        udpateDelayStart(fly._id, delay);
+      }
     });
+
+    return flies;
   } catch (error) {
     throw new Error("Impossible de récupérer les vols à venir");
   }

@@ -26,5 +26,5 @@ app.use("/airport", airportRouter);
 app.use("/", dashboard);
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+  console.log(`Listening on port ${port}`);
 });

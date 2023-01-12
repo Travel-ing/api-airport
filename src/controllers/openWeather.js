@@ -6,7 +6,7 @@ async function getWeatherByCoord(coordinate) {
   );
 }
 
-async function setDelayFinish(weather) {
+async function setDelay(weather) {
   let delay = 0;
   switch (weather.weather[0].main) {
     case "Thunderstorm":
@@ -53,5 +53,5 @@ async function setDelayFinish(weather) {
 
 module.exports = {
   getWeatherByCoord,
-  setDelayFinish,
+  setDelay,
 };

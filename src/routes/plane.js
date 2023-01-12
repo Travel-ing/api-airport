@@ -10,6 +10,14 @@ router.get("/:id", async function (req, res) {
   }
 });
 
+router.get("/", async function (req, res) {
+  try {
+    res.status(200).json(await controller.getPlane());
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
 router.post("/", async function (req, res) {
   try {
     res.status(200).json(await controller.createPlane(req.body));

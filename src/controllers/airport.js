@@ -16,6 +16,14 @@ async function getAirportById(id) {
   }
 }
 
+async function getAirport() {
+  try {
+    return await AirportModel.find();
+  } catch (error) {
+    throw new Error("Impossible de récupérer la liste d'aéroports");
+  }
+}
+
 async function updateAirport(id, body) {
   try {
     await AirportModel.findByIdAndUpdate(id, body);
@@ -27,7 +35,7 @@ async function updateAirport(id, body) {
 
 async function deleteAirport(id) {
   try {
-    return await AirportModel.findOneAndDelete(id);
+    return await AirportModel.findOneAndDelete({ _id: id });
   } catch (error) {
     throw new Error("Impossible de supprimer l'aéroport : " + id);
   }
@@ -35,6 +43,7 @@ async function deleteAirport(id) {
 
 module.exports = {
   createAirport,
+  getAirport,
   getAirportById,
   updateAirport,
   deleteAirport,

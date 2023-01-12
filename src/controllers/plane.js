@@ -16,10 +16,18 @@ async function getPlaneById(id) {
   }
 }
 
+async function getPlane() {
+  try {
+    return await PlaneModel.find();
+  } catch (error) {
+    throw new Error("Impossible de récupérer la liste d'avion ");
+  }
+}
+
 async function updatePlane(id, body) {
   try {
     await PlaneModel.findByIdAndUpdate(id, body);
-    return getPlaneById(id)
+    return getPlaneById(id);
   } catch (error) {
     throw new Error("Impossible de modifer l'avion : " + id);
   }
@@ -27,7 +35,7 @@ async function updatePlane(id, body) {
 
 async function deletePlane(id) {
   try {
-    return await PlaneModel.findOneAndDelete(id);
+    return await PlaneModel.findOneAndDelete({ _id: id });
   } catch (error) {
     throw new Error("Impossible de supprimer l'avion : " + id);
   }
@@ -35,6 +43,7 @@ async function deletePlane(id) {
 
 module.exports = {
   createPlane,
+  getPlane,
   getPlaneById,
   updatePlane,
   deletePlane,

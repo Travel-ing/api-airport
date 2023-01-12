@@ -2,6 +2,14 @@ var express = require("express");
 var router = express.Router();
 const controller = require("../controllers/airport");
 
+router.get("/", async function (req, res) {
+  try {
+    res.status(200).json(await controller.getAirport());
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
 router.get("/:id", async function (req, res) {
   try {
     res.status(200).json(await controller.getAirportById(req.params.id));
@@ -20,7 +28,9 @@ router.post("/", async function (req, res) {
 
 router.put("/:id", async function (req, res) {
   try {
-    res.status(200).json(await controller.updateAirport(req.params.id, req.body));
+    res
+      .status(200)
+      .json(await controller.updateAirport(req.params.id, req.body));
   } catch (error) {
     res.status(400).json({ error: error.message });
   }

@@ -35,19 +35,18 @@ The REST API to the example app is described below.
 
 With admin account
 
-body:
-{
-"plane":"639b21683067549beaf3b653",
-"passenger": 125,
-"start": {
-"airport": "639b2389461444b6c0c176cc",
-"date": "2023-01-03T11:10:18.188Z"
-},
-"finish": {
-"airport": "63b7f55b2879e9c072c9dcd1",
-"date": "2023-01-08T11:10:18.188Z"
-}
-}
+    body : {
+        "plane":"639b21683067549beaf3b653",
+        "passenger": 125,
+        "start": {
+            "airport": "639b2389461444b6c0c176cc",
+            "date": "2023-01-03T11:10:18.188Z"
+        },
+        "finish": {
+        "airport": "63b7f55b2879e9c072c9dcd1",
+        "date": "2023-01-08T11:10:18.188Z"
+        }
+    }
 
 ### Response
 
@@ -76,19 +75,18 @@ With admin account
 
 `PUT /fly/:id`
 
-body:
-{
-"plane":"639b21683067549beaf3b653",
-"passenger": 126,
-"start": {
-"airport": "639b2389461444b6c0c176cc",
-"date": "2023-01-03T11:10:18.188Z"
-},
-"finish": {
-"airport": "63b7f55b2879e9c072c9dcd1",
-"date": "2023-01-08T11:10:18.188Z"
-}
-}
+    body : {
+        "plane":"639b21683067549beaf3b653",
+        "passenger": 126,
+        "start": {
+            "airport": "639b2389461444b6c0c176cc",
+            "date": "2023-01-03T11:10:18.188Z"
+        },
+        "finish": {
+            "airport": "63b7f55b2879e9c072c9dcd1",
+            "date": "2023-01-08T11:10:18.188Z"
+        }
+    }
 
 ### Response
 
@@ -184,8 +182,7 @@ With admin account
 
 With admin account
 
-body:
-    {
+    body : {
         "name": "B70",
         "brand": "Boeig",
         "maxPlace": 391,
@@ -214,8 +211,7 @@ body:
 
 With admin account
 
-body:
-    {
+    body : {
         "name": "B77",
         "brand": "Boeig",
         "maxPlace": 391,
@@ -304,8 +300,7 @@ With admin account
 
 With admin account
 
-body : 
-    {
+    body : {
 		"coordinate": {
 			"latitude": 49.009724,
 			"longitude": 2.547778
@@ -336,8 +331,7 @@ body :
 
 With admin account
 
-body : 
-    {
+    body : {
 		"coordinate": {
 			"latitude": 49.009724,
 			"longitude": 2.547778

@@ -55,7 +55,9 @@ async function currentFly() {
     const flies = await FlyModel.find({
       "start.date": { $lte: new Date() },
       "finish.date": { $gte: new Date() },
-    }).populate("finish.airport", "coordinate");
+    })
+      .populate("start.airport", "coordinate name")
+      .populate("finish.airport", "coordinate name");
 
     flies.map(async (fly) => {
       const weather = await controllerWeather.getWeatherByCoord(
@@ -77,7 +79,9 @@ async function comingFly() {
   try {
     const flies = await FlyModel.find({
       "start.date": { $gte: new Date() },
-    }).populate("start.airport", "coordinate");
+    })
+      .populate("start.airport", "coordinate name")
+      .populate("finish.airport", "coordinate name");
 
     flies.map(async (fly) => {
       const weather = await controllerWeather.getWeatherByCoord(

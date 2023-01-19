@@ -2,11 +2,23 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const AirportSchema = new Schema({
-  name: String,
-  AITA: String,
+  name: {
+    type: String,
+    required: true,
+  },
+  AITA: {
+    type: String,
+    required: true,
+  },
   coordinate: {
-    latitude: Number,
-    longitude: Number,
+    latitude: {
+      type: Number,
+      required: true,
+    },
+    longitude: {
+      type: Number,
+      required: true,
+    },
   },
 });
 
